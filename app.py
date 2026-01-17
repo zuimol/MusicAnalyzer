@@ -218,13 +218,38 @@ with st.sidebar:
         st.metric("总文件数", len(st.session_state.df))
         st.metric("唯一歌曲", st.session_state.df["song_key"].nunique())
         st.metric("格式类型", st.session_state.df["format"].nunique())
-
-# ========== 主区域内容 ==========
-if st.session_state.df is None:
-    st.info("💡 请在左侧选择目录并点击 '开始扫描'")
-    st.stop()
-
-# 如果没有选择功能，显示统计
+    
+    st.divider()
+    
+    # 导出功能
+    st.markdown("### 📥 导出工具")
+    if st.button("📝 导出清单", use_container_width=True, help="生成需要升级的歌曲清单"):
+        try:
+            from export_download_list import DownloadListGenerator
+            with st.spinner("正在生成清单..."):
+                generator = DownloadListGenerator(music_path=st.session_state.current_path)
+                generator.df = st.session_state.df
+                
+                data = {
+                    "仅MP3歌曲": generator.generate_mp3_upgrade_list(),
+                    "多版本歌曲": generator.generate_multi_version_list()
+                }
+                
+                generator.export_to_csv(data)
+                generator.export_to_txt(data)
+                generator.export_to_json(data)
+                generator.print_summary(data)
+                
+                st.success("✅ 清单已生成，保存在 ./exports 目录")
+                st.info("""
+                💡 下载建议：
+                1. 打开 exports 目录中的 TXT 文件
+                2. 复制歌曲名称到酷我音乐搜索
+                3. 优先下载 FLAC 版本
+                4. 完成后重新扫描验证
+                """)
+        except Exception as e:
+            st.error(f"❌ 生成失败: {str(e)}")
 if st.session_state.selected_function is None:
     st.subheader("🎯 清理建议", divider="blue")
     
