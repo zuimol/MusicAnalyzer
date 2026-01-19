@@ -262,7 +262,6 @@ MIT License
 
 ## 📖 相关文档
 
-- [详细下载升级指南](./DOWNLOAD_GUIDE.md)
 - [快速启动脚本说明](./run.bat)
 
 ---
