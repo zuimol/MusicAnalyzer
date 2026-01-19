@@ -64,14 +64,6 @@ def find_duplicates(df: pd.DataFrame) -> pd.DataFrame:
     return df[df.duplicated("song_key", keep=False) & df["song_key"].notna()]
 
 
-def find_multi_version(df: pd.DataFrame) -> pd.DataFrame:
-    return (
-        df.groupby("song_key")
-        .filter(lambda x: x["format"].nunique() > 1)
-        .dropna(subset=["song_key"])
-    )
-
-
 def find_mp3_only(df: pd.DataFrame) -> pd.DataFrame:
     def only_mp3(group):
         return set(group["format"]) == {"mp3"}
