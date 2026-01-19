@@ -36,6 +36,10 @@ COLORS = {
 # ========== 页面样式 CSS ==========
 STYLE_CSS = """
 <style>
+    .block-container {
+        padding-top: 2rem !important;
+        padding-bottom: 1rem !important;
+    }
     /* 全局色彩主题 */
     :root {
         --primary: #667eea;
@@ -56,8 +60,8 @@ STYLE_CSS = """
     h1, h2, h3, h4, h5, h6 {
         font-weight: 600;
         letter-spacing: 0.5px;
-        margin-top: 0.5rem !important;
-        margin-bottom: 0.5rem !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
     }
     
     h1 { font-size: 2.2rem; }
