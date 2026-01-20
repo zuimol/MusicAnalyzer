@@ -129,4 +129,4 @@ def organize_music_files_by_artist(directory, include_subdirectories=True):
 
 # 示例用法
 if __name__ == "__main__":
-    organize_music_files_by_artist("G:\\Music\\11common", include_subdirectories=False)
+    organize_music_files_by_artist("G:\\Music\\11sync", include_subdirectories=False)
